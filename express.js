@@ -9,6 +9,7 @@ connect("mongodb://127.0.0.1:27017/s9")
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded());
 
 // middleware
 // app.use((req, res, next) => {
@@ -20,14 +21,10 @@ app.use(express.json());
 //   res.write("middleware 2");
 //   next();
 // });
-const serviceStopMiddleware = (req, res, next) => {
-  res.status(403).send();
-};
-const serviceStopMiddleware2 = (req, res, next) => {
-  next();
-};
+// password encryption
+// authentication
 
-app.use("/users", serviceStopMiddleware, serviceStopMiddleware2, userRouter);
+app.use("/users", userRouter);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

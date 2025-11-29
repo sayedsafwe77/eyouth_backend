@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="http://localhost:3002" method="post" enctype="multipart/form-data">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="repeat_password">Repeat Password:</label>
+        <input type="password" id="repeat_password" name="repeat_password" required>
+        <label for="birth_year">Birth Year:</label>
+        <input type="number" min="1900" max="2025" placeholder="YYYY">
+        <input type="file" multiple name="avatar">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        fetch().then(res => res.blob())
+    </script>
+</body>
+</html>
