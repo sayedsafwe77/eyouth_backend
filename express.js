@@ -1,8 +1,9 @@
 import express from "express";
 import { connect } from "mongoose";
 import userRouter from "./routes/users.mjs";
+import "dotenv/config";
 
-connect("mongodb://127.0.0.1:27017/s9")
+connect(process.env.DB_CONNECTION)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Could not connect to MongoDB", err));
 
@@ -10,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded());
-
+app.use(express.static("public"));
 // middleware
 // app.use((req, res, next) => {
 //   res.write("middleware 1");

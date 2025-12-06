@@ -25,12 +25,16 @@ UserSchema.statics.findByCredentials = async function (email, password) {
 };
 
 UserSchema.methods.generateToken = function () {
-  return jwt.sign({ id: this._id.toString() }, "this is my secret key");
+  return jwt.sign({ id: this._id.toString() }, process.env.SECRET_KEY);
 };
 
 UserSchema.methods.toJSON = function () {
   const userObject = this.toObject();
   delete userObject.password;
+
+  userObject.avatar = userObject.avatar
+    ? `${process.env.BASE_URL}/uploads/${userObject.avatar}`
+    : null;
   return userObject;
 };
 const User = model("users", UserSchema);

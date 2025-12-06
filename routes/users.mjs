@@ -8,7 +8,7 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, "public/uploads/");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -46,7 +46,7 @@ router.post(
       await userValidationSchema.validateAsync(req.body);
       const userData = req.body;
       userData.password = await bcrypt.hash(userData.password, 10);
-      userData.avatar = req.file?.path;
+      userData.avatar = req.file?.filename;
       const user = await User.create(userData);
       res.status(201).send({ message: "User created", data: { user } });
     } catch (error) {
